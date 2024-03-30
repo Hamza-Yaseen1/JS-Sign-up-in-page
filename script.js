@@ -1,37 +1,56 @@
+const wrapper = document.querySelector(".wrapper"),
+  signupHeader = document.querySelector(".signup header"),
+  loginHeader = document.querySelector(".login header");
+
+loginHeader.addEventListener("click", () => {
+  wrapper.classList.add("active");
+});
+signupHeader.addEventListener("click", () => {
+  wrapper.classList.remove("active");
+});
+
 // Data storage for registered users
 let users = [];
 
 // Sign Up
-document.getElementById("signup-form").addEventListener("submit", function(event) {
+document
+  .getElementById("signup-form")
+  .addEventListener("submit", function (event) {
     event.preventDefault();
 
     const email = document.getElementById("signup-email").value;
     const password = document.getElementById("signup-password").value;
 
-    if (users.find(user => user.email === email)) {
-        document.getElementById("signup-error").innerText = "Error: Email already exists";
-        return;
+    if (users.find((user) => user.email === email)) {
+      document.getElementById("signup-error").innerText =
+        "Error: Email already exists";
+      return;
     }
 
     users.push({ email, password });
-    console.log("User signed up successfully:", email);
+    console.log("User signed up successfully:", email + "@gmail.com");
     document.getElementById("signup-error").innerText = "";
     document.getElementById("signup-form").reset();
-});
+  });
 
 // Sign In
-document.getElementById("signin-form").addEventListener("submit", function(event) {
+document
+  .getElementById("signin-form")
+  .addEventListener("submit", function (event) {
     event.preventDefault();
 
     const email = document.getElementById("signin-email").value;
     const password = document.getElementById("signin-password").value;
 
-    const user = users.find(user => user.email === email && user.password === password);
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
     if (user) {
-        alert("User signed in successfully:", email);
-        document.getElementById("signin-error").innerText = "";
-        // Redirect to a new page or perform other actions after successful sign-in
+      alert("User signed in successfully:", email);
+      document.getElementById("signin-error").innerText = "";
+      // Redirect to a new page or perform other actions after successful sign-in
     } else {
-        document.getElementById("signin-error").innerText = "Error: Incorrect email or password";
+      document.getElementById("signin-error").innerText =
+        "Error: Incorrect email or password";
     }
-});
+  });
